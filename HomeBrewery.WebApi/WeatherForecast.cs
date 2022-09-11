@@ -1,4 +1,4 @@
-namespace HomeBreweryWebApp
+namespace HomeBrewery.WebApi
 {
     public class WeatherForecast
     {

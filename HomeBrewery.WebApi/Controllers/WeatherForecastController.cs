@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace HomeBreweryWebApp.Controllers
+namespace HomeBrewery.WebApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]
