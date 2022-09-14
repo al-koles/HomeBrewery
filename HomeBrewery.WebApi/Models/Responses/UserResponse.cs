@@ -1,12 +1,12 @@
 ﻿using HomeBrewery.Application.Common.Mappings;
-using HomeBrewery.Domain;
+using HomeBrewery.Application.Services.Users.Models;
 using HomeBrewery.Domain.Data;
 
-namespace HomeBrewery.Application.Services.Users.Models;
+namespace HomeBrewery.WebApi.Models.Responses;
 
-public class UserOutputModel : IMapWith<HBUser>
+public class UserResponse : IMapWith<UserOutputModel>
 {
-    public UserOutputModel()
+    public UserResponse()
     {
         Roles = new List<Role>();
     }

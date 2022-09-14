@@ -6,6 +6,7 @@ namespace HomeBrewery.Application.Services.Users;
 public interface IUsersService
 {
     Task<UserOutputModel> GetByIdAsync(int userId);
+    Task<List<UserOutputModel>> GetAllAsync();
     Task UpdateAsync(UserUpdateModel model);
     Task DeleteAsync(int userId);
     Task AddToRolesAsync(int userId, IEnumerable<Role> roles);

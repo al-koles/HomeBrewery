@@ -34,12 +34,30 @@ public class UsersService : IUsersService
             throw new NotFoundException(nameof(HBUser), userId);
         }
 
-        var roles = await _userManager.GetRolesAsync(user);
+        var roleNames = await _userManager.GetRolesAsync(user);
+        var roles = roleNames.Select(rn => Enum.TryParse<Role>(rn, out var role) ? role : Role.User).ToList();
 
         var userModel = _mapper.Map<UserOutputModel>(user);
-        userModel.Roles = roles.ToList();
+        userModel.Roles = roles;
 
         return userModel;
+    }
+
+    public async Task<List<UserOutputModel>> GetAllAsync()
+    {
+        var users = await _userManager.Users.ToListAsync();
+        var userModels = _mapper.Map<List<UserOutputModel>>(users);
+        
+        foreach (var user in users)
+        {
+            var roleNames = await _userManager.GetRolesAsync(user);
+            var roles = roleNames.Select(rn => Enum.TryParse<Role>(rn, out var role) ? role : Role.User).ToList();
+
+            var userModel = userModels.First(u => u.Id == user.Id);
+            userModel.Roles = roles;
+        }
+
+        return userModels;
     }
 
     public async Task UpdateAsync(UserUpdateModel model)
