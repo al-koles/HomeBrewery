@@ -12,7 +12,7 @@ public class HomeBreweryDbContext : IdentityDbContext<HBUser, HBRole, int,
 {
     public HomeBreweryDbContext(DbContextOptions options) : base(options)
     {
-        Database.EnsureDeleted();
+        // Database.EnsureDeleted();
         Database.EnsureCreated();
     }
 

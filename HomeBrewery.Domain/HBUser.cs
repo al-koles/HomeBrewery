@@ -6,12 +6,12 @@ public class HBUser : IdentityUser<int>
 {
     public HBUser()
     {
-        UserRoles = new List<HBUserRole>();
+        UserRoles = new HashSet<HBUserRole>();
         Recipes = new HashSet<Recipe>();
         UserRecipes = new HashSet<UserRecipe>();
     }
     
-    public virtual List<HBUserRole> UserRoles { get; set; }
+    public virtual ICollection<HBUserRole> UserRoles { get; set; }
     public virtual ICollection<Recipe> Recipes { get; set; }
     public virtual ICollection<UserRecipe> UserRecipes { get; set; }
 }

@@ -13,7 +13,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace HomeBrewery.Application.Services.Auth;
 
-public class AuthService
+public class AuthService : IAuthService
 {
     private readonly JwtBearerTokenSettings _jwtSettings;
     private readonly IMapper _mapper;
@@ -29,29 +29,24 @@ public class AuthService
         _jwtSettings = jwtSettings.Value;
     }
 
-    public async Task<LoginOutputModel> LoginAsync(UserInputModel userModel)
+    public async Task<LoginOutputModel> LoginAsync(string email, string password)
     {
-        var user = await _userManager.FindByEmailAsync(userModel.Email);
+        var user = await _userManager.FindByEmailAsync(email);
         if (user == null)
         {
-            throw new NotFoundException(nameof(HBUser), userModel.Email);
+            throw new NotFoundException(nameof(HBUser), email);
         }
 
-        if (!await _userManager.CheckPasswordAsync(user, userModel.Password))
+        if (!await _userManager.CheckPasswordAsync(user, password))
         {
             throw new Exception("Incorrect password");
-        }
-
-        if (!await _userManager.IsEmailConfirmedAsync(user))
-        {
-            throw new Exception("Email is not confirmed");
         }
 
         var userRoles = await _userManager.GetRolesAsync(user);
 
         var authClaims = new List<Claim>
         {
-            new(ClaimTypes.Name, user.Id.ToString()),
+            new(ClaimTypes.NameIdentifier, user.Id.ToString()),
             new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
         };
 
@@ -77,7 +72,7 @@ public class AuthService
         };
     }
 
-    public async Task<HBUser> RegisterAsync(UserInputModel registerModel)
+    public async Task<int> RegisterAsync(UserRegisterModel registerModel)
     {
         var userExists = await _userManager.FindByEmailAsync(registerModel.Email);
         if (userExists != null)
@@ -94,6 +89,6 @@ public class AuthService
                 new Exception(string.Join("\n", result.Errors)));
         }
 
-        return user;
+        return user.Id;
     }
 }

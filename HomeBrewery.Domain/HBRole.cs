@@ -6,8 +6,8 @@ public class HBRole : IdentityRole<int>
 {
     public HBRole()
     {
-        UserRoles = new List<HBUserRole>();
+        UserRoles = new HashSet<HBUserRole>();
     }
     
-    public virtual List<HBUserRole> UserRoles { get; set; }
+    public virtual ICollection<HBUserRole> UserRoles { get; set; }
 }
