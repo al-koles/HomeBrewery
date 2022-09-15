@@ -1,13 +1,13 @@
 using System.Reflection;
 using System.Text;
 using FluentValidation;
-using FluentValidation.AspNetCore;
 using HomeBrewery.Application;
 using HomeBrewery.Application.Common.Mappings;
 using HomeBrewery.Application.Common.Settings;
 using HomeBrewery.Application.Interfaces;
 using HomeBrewery.Domain;
 using HomeBrewery.Persistence;
+using HomeBrewery.WebApi.Extensions;
 using MDAreas.WebApi.Middleware;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -126,5 +126,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MigrateDbContextIfNecessary<HomeBreweryDbContext>();
 
 app.Run();

@@ -1,8 +1,10 @@
 ﻿using HomeBrewery.Application.Interfaces;
 using HomeBrewery.Domain;
+using HomeBrewery.Persistence.Settings;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 namespace HomeBrewery.Persistence;
 
@@ -10,10 +12,11 @@ public class HomeBreweryDbContext : IdentityDbContext<HBUser, HBRole, int,
     IdentityUserClaim<int>, HBUserRole, IdentityUserLogin<int>, IdentityRoleClaim<int>, 
     IdentityUserToken<int>>, IHomeBreweryDbContext
 {
-    public HomeBreweryDbContext(DbContextOptions options) : base(options)
+    private readonly DefaultAdminSettings _adminSettings;
+
+    public HomeBreweryDbContext(DbContextOptions options, IOptions<DefaultAdminSettings> adminSettings) : base(options)
     {
-        // Database.EnsureDeleted();
-        Database.EnsureCreated();
+        _adminSettings = adminSettings.Value;
     }
 
     public virtual DbSet<Recipe> Recipes { get; set; } = null!;
@@ -40,5 +43,7 @@ public class HomeBreweryDbContext : IdentityDbContext<HBUser, HBRole, int,
             .HasForeignKey(e => e.RoleId);
 
         base.OnModelCreating(builder);
+
+        builder.SeedAdminAndRoles(_adminSettings);
     }
 }

@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HomeBrewery.WebApi.Controllers;
 
+[Produces("application/json")]
+[Route("api/[controller]/[action]")]
 [ApiController]
 public class UsersController : BaseController
 {
@@ -20,7 +22,16 @@ public class UsersController : BaseController
     }
 
     [Authorize]
+    [HttpGet]
     public async Task<ActionResult<UserResponse>> GetCurrentUser()
+    {
+        var user = await _usersService.GetByIdAsync(int.Parse(UserId!));
+        return Ok(_mapper.Map<UserResponse>(user));
+    }
+    
+    [Authorize]
+    [HttpGet("{userId}")]
+    public async Task<ActionResult<UserResponse>> GetUserById(int userId)
     {
         var user = await _usersService.GetByIdAsync(int.Parse(UserId!));
         return Ok(_mapper.Map<UserResponse>(user));

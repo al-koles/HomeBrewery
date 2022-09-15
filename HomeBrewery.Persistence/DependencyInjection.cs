@@ -1,4 +1,5 @@
 ﻿using HomeBrewery.Application.Interfaces;
+using HomeBrewery.Persistence.Settings;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,6 +11,8 @@ public static class DependencyInjection
     public static IServiceCollection AddPersistence(
         this IServiceCollection services, IConfiguration configuration)
     {
+        services.Configure<DefaultAdminSettings>(configuration.GetSection(DefaultAdminSettings.SectionName));
+        
         var connectionString = configuration.GetConnectionString("DefaultConnection");
         services.AddDbContext<HomeBreweryDbContext>(bld => bld.UseSqlServer(connectionString));
 

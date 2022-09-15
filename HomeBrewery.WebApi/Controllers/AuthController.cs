@@ -12,7 +12,6 @@ namespace HomeBrewery.WebApi.Controllers;
 [Produces("application/json")]
 [Route("api/[controller]/[action]")]
 [ApiController]
-[ProducesResponseType(StatusCodes.Status400BadRequest)]
 public class AuthController : BaseController
 {
     private readonly IAuthService _authService;
