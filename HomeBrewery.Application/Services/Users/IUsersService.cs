@@ -7,7 +7,7 @@ public interface IUsersService
 {
     Task<UserOutputModel> GetByIdAsync(int userId);
     Task<List<UserOutputModel>> GetAllAsync();
-    Task UpdateAsync(UserUpdateModel model);
+    Task PatchAsync(PatchUserModel model);
     Task DeleteAsync(int userId);
     Task AddToRolesAsync(int userId, IEnumerable<Role> roles);
     Task RemoveFromRolesAsync(int userId, IEnumerable<Role> roles);

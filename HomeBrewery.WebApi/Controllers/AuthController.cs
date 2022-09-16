@@ -61,6 +61,6 @@ public class AuthController : BaseController
 
         _logger.LogInformation(userId, "registered");
 
-        return Ok(userId);
+        return CreatedAtAction("GetById", "Users", new { userId }, request);
     }
 }
