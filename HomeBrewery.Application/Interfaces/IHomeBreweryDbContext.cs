@@ -12,5 +12,5 @@ public interface IHomeBreweryDbContext
     DbSet<UserRecipe> UserRecipes { get; set; }
     DbSet<Sample> Samples { get; set; }
 
-    Task<int> SaveChangesAsync(CancellationToken cancellationToken);
+    Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }

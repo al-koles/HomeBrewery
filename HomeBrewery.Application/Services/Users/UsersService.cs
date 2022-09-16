@@ -60,7 +60,7 @@ public class UsersService : IUsersService
         return userModels;
     }
 
-    public async Task PatchAsync(PatchUserModel model)
+    public async Task PatchAsync(UserPatchModel model)
     {
         var user = await _dbContext.Users
             .FirstOrDefaultAsync(u => u.Id == model.Id);

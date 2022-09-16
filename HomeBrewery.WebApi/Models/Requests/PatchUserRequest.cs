@@ -5,7 +5,7 @@ using HomeBrewery.Application.Services.Users.Models;
 
 namespace HomeBrewery.WebApi.Models.Requests;
 
-public class PatchUserRequest : IMapWith<PatchUserModel>
+public class PatchUserRequest : IMapWith<UserPatchModel>
 {
     [DataType(DataType.EmailAddress)]
     public string? Email { get; set; }
@@ -14,8 +14,8 @@ public class PatchUserRequest : IMapWith<PatchUserModel>
 
     public void Mapping(Profile profile)
     {
-        profile.CreateMap<PatchUserRequest, PatchUserModel>()
+        profile.CreateMap<PatchUserRequest, UserPatchModel>()
             .ForMember(dst => dst.Id,
-                opt => opt.MapFrom((_, _, _, context) => context.Items[nameof(PatchUserModel.Id)]));
+                opt => opt.MapFrom((_, _, _, context) => context.Items[nameof(UserPatchModel.Id)]));
     }
 }

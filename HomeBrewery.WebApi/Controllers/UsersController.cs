@@ -52,8 +52,8 @@ public class UsersController : BaseController
     [HttpPatch("{userId}")]
     public async Task<IActionResult> Patch(int userId, PatchUserRequest user)
     {
-        var patchModel = _mapper.Map<PatchUserModel>(user, opt =>
-            opt.Items.Add(nameof(PatchUserModel.Id), userId));
+        var patchModel = _mapper.Map<UserPatchModel>(user, opt =>
+            opt.Items.Add(nameof(UserPatchModel.Id), userId));
         await _usersService.PatchAsync(patchModel);
 
         return NoContent();

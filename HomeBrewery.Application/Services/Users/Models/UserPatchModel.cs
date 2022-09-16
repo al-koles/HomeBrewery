@@ -4,7 +4,7 @@ using HomeBrewery.Domain;
 
 namespace HomeBrewery.Application.Services.Users.Models;
 
-public class PatchUserModel : IMapWith<HBUser>
+public class UserPatchModel : IMapWith<HBUser>
 {
     public int Id { get; set; }
     public string? Email { get; set; } = null!;
@@ -12,7 +12,7 @@ public class PatchUserModel : IMapWith<HBUser>
     
     public void Mapping(Profile profile)
     {
-        profile.CreateMap<PatchUserModel, HBUser>()
+        profile.CreateMap<UserPatchModel, HBUser>()
             .ForMember(dst => dst.UserName,
                 opt =>
                 {
