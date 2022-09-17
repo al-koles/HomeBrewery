@@ -35,6 +35,7 @@ public static class Seeder
             Email = defaultAdminSettings.Email,
             NormalizedUserName = defaultAdminSettings.Email.ToUpper(),
             NormalizedEmail = defaultAdminSettings.Email.ToUpper(),
+            SecurityStamp = Guid.NewGuid().ToString(),
         };
         
         var passwordHasher = new PasswordHasher<HBUser>();

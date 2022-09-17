@@ -70,7 +70,11 @@ public class UsersService : IUsersService
         }
 
         _mapper.Map(model, user);
-        user.PasswordHash = _userManager.PasswordHasher.HashPassword(user, model.Password);
+
+        if (model.Password != null)
+        {
+            user.PasswordHash = _userManager.PasswordHasher.HashPassword(user, model.Password);
+        }
 
         await _userManager.UpdateAsync(user);
     }

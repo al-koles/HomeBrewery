@@ -1,13 +1,16 @@
-﻿namespace HomeBrewery.Domain;
+﻿using HomeBrewery.Application.Common.Mappings;
+using HomeBrewery.Application.Services.Recipes.Models;
 
-public class Recipe : Entity
+namespace HomeBrewery.WebApi.Models.Responses;
+
+public class RecipeResponse : IMapWith<RecipeOutputModel>
 {
-    public Recipe()
+    public RecipeResponse()
     {
-        Users = new HashSet<HBUser>();
-        UserRecipes = new HashSet<Attempt>();
+        Users = new HashSet<int>();
     }
-    
+
+    private int Id { get; set; }
     public string Name { get; set; } = null!;
     public string Description { get; set; } = null!;
     public string Text { get; set; } = null!;
@@ -18,6 +21,6 @@ public class Recipe : Entity
     public byte Ba { get; set; }
     public decimal Price { get; set; }
 
-    public virtual ICollection<HBUser> Users { get; set; }
-    public virtual ICollection<Attempt> UserRecipes { get; set; }
+    public ICollection<int> Users { get; set; }
+
 }

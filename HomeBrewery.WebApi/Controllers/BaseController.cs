@@ -14,8 +14,8 @@ namespace HomeBrewery.WebApi.Controllers
             _mapper = mapper;
             _logger = logger;
         }
-        internal string? UserId => !User.Identity!.IsAuthenticated
+        internal int? UserId => !User.Identity!.IsAuthenticated
             ? null
-            : User.FindFirstValue(ClaimTypes.NameIdentifier);
+            : int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
     }
 }

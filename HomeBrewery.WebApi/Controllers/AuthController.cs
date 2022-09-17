@@ -33,7 +33,7 @@ public class AuthController : BaseController
     {
         try
         {
-            await _usersService.GetByIdAsync(int.Parse(UserId!));
+            await _usersService.GetByIdAsync(UserId!.Value);
             return true;
         }
         catch

@@ -6,7 +6,8 @@ namespace HomeBrewery.Application.Services.Recipes;
 public interface IRecipesService
 {
     Task<RecipeOutputModel> GetByIdAsync(int recipeId);
-    Task<List<RecipeOutputModel>> FindAsync(Expression<Predicate<RecipeOutputModel>> predicate);
+    Task<List<RecipeOutputModel>> FindAsync(Expression<Predicate<RecipeOutputModel>>? predicate = null);
+    Task<int> CreateAsync(RecipeCreateModel model);
     Task PatchAsync(RecipePatchModel model);
     Task DeleteAsync(int recipeId);
 }

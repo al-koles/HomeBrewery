@@ -13,7 +13,7 @@ public class RecipeOutputModel : IMapWith<Recipe>
     
     public string Name { get; set; } = null!;
     public string Description { get; set; } = null!;
-    public string ConfigLink { get; set; } = null!;
+    public string Text { get; set; } = null!;
     public byte Abv { get; set; }
     public byte Ibu { get; set; }
     public byte Og { get; set; }

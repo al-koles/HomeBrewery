@@ -28,11 +28,11 @@ public class UsersController : BaseController
     [HttpGet]
     public async Task<ActionResult<UserResponse>> GetCurrent()
     {
-        var user = await _usersService.GetByIdAsync(int.Parse(UserId!));
+        var user = await _usersService.GetByIdAsync(UserId!.Value);
         return Ok(_mapper.Map<UserResponse>(user));
     }
 
-    [Authorize]
+    [Authorize(Roles = RoleConst.Admin)]
     [HttpGet("{userId}")]
     public async Task<ActionResult<UserResponse>> GetById(int userId)
     {
@@ -40,17 +40,28 @@ public class UsersController : BaseController
         return Ok(_mapper.Map<UserResponse>(user));
     }
 
-    [Authorize]
+    [Authorize(Roles = RoleConst.Admin)]
     [HttpGet]
     public async Task<ActionResult<List<UserResponse>>> GetAll()
     {
         var user = await _usersService.GetAllAsync();
         return Ok(_mapper.Map<List<UserResponse>>(user));
     }
-
+    
     [Authorize]
+    [HttpPatch]
+    public async Task<IActionResult> PatchCurrent(PatchUserRequest user)
+    {
+        var patchModel = _mapper.Map<UserPatchModel>(user, opt =>
+            opt.Items.Add(nameof(UserPatchModel.Id), UserId));
+        await _usersService.PatchAsync(patchModel);
+
+        return NoContent();
+    }
+
+    [Authorize(Roles = RoleConst.Admin)]
     [HttpPatch("{userId}")]
-    public async Task<IActionResult> Patch(int userId, PatchUserRequest user)
+    public async Task<IActionResult> PatchById(int userId, PatchUserRequest user)
     {
         var patchModel = _mapper.Map<UserPatchModel>(user, opt =>
             opt.Items.Add(nameof(UserPatchModel.Id), userId));
@@ -58,17 +69,26 @@ public class UsersController : BaseController
 
         return NoContent();
     }
-
+    
     [Authorize]
+    [HttpDelete]
+    public async Task<IActionResult> DeleteCurrent()
+    {
+        await _usersService.DeleteAsync(UserId!.Value);
+
+        return NoContent();
+    }
+
+    [Authorize(Roles = RoleConst.Admin)]
     [HttpDelete("{userId}")]
-    public async Task<IActionResult> Delete(int userId)
+    public async Task<IActionResult> DeleteById(int userId)
     {
         await _usersService.DeleteAsync(userId);
 
         return NoContent();
     }
 
-    [Authorize]
+    [Authorize(Roles = RoleConst.Admin)]
     [HttpPost("{roleName}, {userId}")]
     public async Task<IActionResult> AddToRole(string roleName, int userId)
     {

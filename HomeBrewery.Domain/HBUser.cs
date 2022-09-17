@@ -8,10 +8,10 @@ public class HBUser : IdentityUser<int>
     {
         UserRoles = new HashSet<HBUserRole>();
         Recipes = new HashSet<Recipe>();
-        UserRecipes = new HashSet<UserRecipe>();
+        UserRecipes = new HashSet<Attempt>();
     }
     
     public virtual ICollection<HBUserRole> UserRoles { get; set; }
     public virtual ICollection<Recipe> Recipes { get; set; }
-    public virtual ICollection<UserRecipe> UserRecipes { get; set; }
+    public virtual ICollection<Attempt> UserRecipes { get; set; }
 }

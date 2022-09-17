@@ -13,14 +13,12 @@ public static class WebApplicationExtensions
         
         try
         {
-            logger.LogInformation($"Migrating database associated with context {typeof(TDbContext).Name}");
-
             if (dbContext.Database.GetPendingMigrations().Any())
             {
+                logger.LogInformation($"Migrating database associated with context {typeof(TDbContext).Name}");
                 dbContext.Database.Migrate();
+                logger.LogInformation($"Migrated database associated with context {typeof(TDbContext).Name}");
             }
-
-            logger.LogInformation($"Migrated database associated with context {typeof(TDbContext).Name}");
         }
         catch (Exception e)
         {

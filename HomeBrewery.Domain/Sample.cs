@@ -9,5 +9,5 @@ public class Sample : Entity
     public double? Sugar { get; set; }
     public double? Temperature { get; set; }
 
-    public UserRecipe UserRecipe { get; set; } = null!;
+    public Attempt Attempt { get; set; } = null!;
 }

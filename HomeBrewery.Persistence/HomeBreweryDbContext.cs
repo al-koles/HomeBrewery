@@ -20,7 +20,7 @@ public class HomeBreweryDbContext : IdentityDbContext<HBUser, HBRole, int,
     }
 
     public virtual DbSet<Recipe> Recipes { get; set; } = null!;
-    public virtual DbSet<UserRecipe> UserRecipes { get; set; } = null!;
+    public virtual DbSet<Attempt> Attempts { get; set; } = null!;
     public virtual DbSet<Sample> Samples { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder builder)
@@ -28,7 +28,7 @@ public class HomeBreweryDbContext : IdentityDbContext<HBUser, HBRole, int,
         builder.Entity<HBUser>()
             .HasMany(e => e.Recipes)
             .WithMany(e => e.Users)
-            .UsingEntity<UserRecipe>(
+            .UsingEntity<Attempt>(
                 e => e.HasOne(ur => ur.Recipe).WithMany(ur => ur.UserRecipes),
                 e => e.HasOne(ur => ur.User).WithMany(ur => ur.UserRecipes));
 

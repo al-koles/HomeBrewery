@@ -32,16 +32,24 @@ public class RecipesService : IRecipesService
 
     public async Task<List<RecipeOutputModel>> FindAsync(Expression<Predicate<RecipeOutputModel>>? predicate = null)
     {
-        var query = _dbContext.Recipes.Include(r => r.Users).AsNoTracking();
+        var recipes = await _dbContext.Recipes.Include(r => r.Users).ToListAsync();
 
         if (predicate != null)
         {
-            query = query.Where(r => predicate.Compile()(_mapper.Map<RecipeOutputModel>(r)));
+            recipes = recipes.Where(r => predicate.Compile()(_mapper.Map<RecipeOutputModel>(r))).ToList();
         }
 
-        var recipes = await query.ToListAsync();
-
         return _mapper.Map<List<RecipeOutputModel>>(recipes);
+    }
+
+    public async Task<int> CreateAsync(RecipeCreateModel model)
+    {
+        var recipe = _mapper.Map<Recipe>(model);
+
+        await _dbContext.Recipes.AddAsync(recipe);
+        await _dbContext.SaveChangesAsync();
+
+        return recipe.Id;
     }
 
     public async Task PatchAsync(RecipePatchModel model)

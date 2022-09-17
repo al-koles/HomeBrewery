@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HomeBrewery.Persistence.Migrations
 {
     [DbContext(typeof(HomeBreweryDbContext))]
-    [Migration("20220915141034_AddedDataSeed")]
-    partial class AddedDataSeed
+    [Migration("20220917003313_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,6 +23,32 @@ namespace HomeBrewery.Persistence.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("HomeBrewery.Domain.Attempt", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("RecipeId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("StartDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RecipeId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Attempts");
+                });
 
             modelBuilder.Entity("HomeBrewery.Domain.HBRole", b =>
                 {
@@ -57,14 +83,14 @@ namespace HomeBrewery.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "ad4b5e0a-48fa-4a71-a796-1d53db6853ee",
+                            ConcurrencyStamp = "316a029d-377f-4c78-b26e-2cc5a64fee33",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "142b13fc-6d23-4a36-8058-a56d887da6e8",
+                            ConcurrencyStamp = "2f339ab7-31f2-4f89-8536-80824474aec9",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -142,14 +168,15 @@ namespace HomeBrewery.Persistence.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "653f5a4f-033c-4bbc-96f9-4a1a5172e0e9",
+                            ConcurrencyStamp = "85d46da5-631c-435f-ae43-f6ffef85a14b",
                             Email = "oleksii.kolesnyk1@nure.ua",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "OLEKSII.KOLESNYK1@NURE.UA",
                             NormalizedUserName = "OLEKSII.KOLESNYK1@NURE.UA",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHE/YBvtOT4be2GCk35aNZdRacd8XRKHFCZ20WzM45NMNIMQBfyGfY3uoJVBhXewRA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEK6hwbiTeG9gVp52AySRpk66NwQjBSOs/fo9QUGzgsnaoCy61RVgbtz+oVbLJ47rcA==",
                             PhoneNumberConfirmed = false,
+                            SecurityStamp = "29441930-a753-4794-aebf-91bce35eff58",
                             TwoFactorEnabled = false,
                             UserName = "oleksii.kolesnyk1@nure.ua"
                         });
@@ -206,10 +233,6 @@ namespace HomeBrewery.Persistence.Migrations
                     b.Property<byte>("Ba")
                         .HasColumnType("tinyint");
 
-                    b.Property<string>("ConfigLink")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -230,6 +253,10 @@ namespace HomeBrewery.Persistence.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Recipes");
@@ -246,6 +273,9 @@ namespace HomeBrewery.Persistence.Migrations
                     b.Property<double?>("Alcohol")
                         .HasColumnType("float");
 
+                    b.Property<int>("AttemptId")
+                        .HasColumnType("int");
+
                     b.Property<double?>("Density")
                         .HasColumnType("float");
 
@@ -261,37 +291,11 @@ namespace HomeBrewery.Persistence.Migrations
                     b.Property<double?>("Temperature")
                         .HasColumnType("float");
 
-                    b.Property<int>("UserRecipeId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("UserRecipeId");
+                    b.HasIndex("AttemptId");
 
                     b.ToTable("Samples");
-                });
-
-            modelBuilder.Entity("HomeBrewery.Domain.UserRecipe", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("RecipeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RecipeId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserRecipes");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -382,6 +386,25 @@ namespace HomeBrewery.Persistence.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("HomeBrewery.Domain.Attempt", b =>
+                {
+                    b.HasOne("HomeBrewery.Domain.Recipe", "Recipe")
+                        .WithMany("UserRecipes")
+                        .HasForeignKey("RecipeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HomeBrewery.Domain.HBUser", "User")
+                        .WithMany("UserRecipes")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Recipe");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("HomeBrewery.Domain.HBUserRole", b =>
                 {
                     b.HasOne("HomeBrewery.Domain.HBRole", null)
@@ -407,32 +430,13 @@ namespace HomeBrewery.Persistence.Migrations
 
             modelBuilder.Entity("HomeBrewery.Domain.Sample", b =>
                 {
-                    b.HasOne("HomeBrewery.Domain.UserRecipe", "UserRecipe")
+                    b.HasOne("HomeBrewery.Domain.Attempt", "Attempt")
                         .WithMany("Samples")
-                        .HasForeignKey("UserRecipeId")
+                        .HasForeignKey("AttemptId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("UserRecipe");
-                });
-
-            modelBuilder.Entity("HomeBrewery.Domain.UserRecipe", b =>
-                {
-                    b.HasOne("HomeBrewery.Domain.Recipe", "Recipe")
-                        .WithMany("UserRecipes")
-                        .HasForeignKey("RecipeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("HomeBrewery.Domain.HBUser", "User")
-                        .WithMany("UserRecipes")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Recipe");
-
-                    b.Navigation("User");
+                    b.Navigation("Attempt");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -471,6 +475,11 @@ namespace HomeBrewery.Persistence.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("HomeBrewery.Domain.Attempt", b =>
+                {
+                    b.Navigation("Samples");
+                });
+
             modelBuilder.Entity("HomeBrewery.Domain.HBRole", b =>
                 {
                     b.Navigation("UserRoles");
@@ -486,11 +495,6 @@ namespace HomeBrewery.Persistence.Migrations
             modelBuilder.Entity("HomeBrewery.Domain.Recipe", b =>
                 {
                     b.Navigation("UserRecipes");
-                });
-
-            modelBuilder.Entity("HomeBrewery.Domain.UserRecipe", b =>
-                {
-                    b.Navigation("Samples");
                 });
 #pragma warning restore 612, 618
         }

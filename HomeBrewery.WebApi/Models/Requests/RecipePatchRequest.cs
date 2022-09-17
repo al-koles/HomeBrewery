@@ -1,12 +1,11 @@
 ﻿using AutoMapper;
 using HomeBrewery.Application.Common.Mappings;
-using HomeBrewery.Domain;
+using HomeBrewery.Application.Services.Recipes.Models;
 
-namespace HomeBrewery.Application.Services.Recipes.Models;
+namespace HomeBrewery.WebApi.Models.Requests;
 
-public class RecipePatchModel : IMapWith<Recipe>
+public class RecipePatchRequest : IMapWith<RecipePatchModel>
 {
-    public int Id { get; set; }
     public string? Name { get; set; }
     public string? Description { get; set; }
     public string? Text { get; set; }
@@ -19,7 +18,8 @@ public class RecipePatchModel : IMapWith<Recipe>
 
     public void Mapping(Profile profile)
     {
-        profile.CreateMap<RecipePatchModel, Recipe>()
-            .ForAllMembers(opt => opt.Condition((_, _, srsMember, _) => srsMember != null));
+        profile.CreateMap<RecipePatchRequest, RecipePatchModel>()
+            .ForMember(dst => dst.Id,
+                opt => opt.MapFrom((_, _, _, context) => context.Items[nameof(RecipePatchModel.Id)]));
     }
 }
