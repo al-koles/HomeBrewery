@@ -1,10 +1,11 @@
 ﻿using AutoMapper;
 
-namespace HomeBrewery.Application.Common.Mappings
+namespace HomeBrewery.Application.Common.Mappings;
+
+public interface IMapWith<T>
 {
-    public interface IMapWith<T>
+    public void Mapping(Profile profile)
     {
-        public void Mapping(Profile profile) =>
-            profile.CreateMap(typeof(T), GetType()).ReverseMap();
+        profile.CreateMap(typeof(T), GetType()).ReverseMap();
     }
 }

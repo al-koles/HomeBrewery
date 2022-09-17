@@ -47,7 +47,7 @@ public class UsersController : BaseController
         var user = await _usersService.GetAllAsync();
         return Ok(_mapper.Map<List<UserResponse>>(user));
     }
-    
+
     [Authorize]
     [HttpPatch]
     public async Task<IActionResult> PatchCurrent(PatchUserRequest user)
@@ -69,7 +69,7 @@ public class UsersController : BaseController
 
         return NoContent();
     }
-    
+
     [Authorize]
     [HttpDelete]
     public async Task<IActionResult> DeleteCurrent()

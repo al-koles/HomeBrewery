@@ -12,11 +12,11 @@ public static class DependencyInjection
         this IServiceCollection services, IConfiguration configuration)
     {
         services.Configure<DefaultAdminSettings>(configuration.GetSection(DefaultAdminSettings.SectionName));
-        
+
         var connectionString = configuration.GetConnectionString("DefaultConnection");
         services.AddDbContext<HomeBreweryDbContext>(bld => bld.UseSqlServer(connectionString));
 
-        services.AddScoped<IHomeBreweryDbContext>(provider => 
+        services.AddScoped<IHomeBreweryDbContext>(provider =>
             provider.GetRequiredService<HomeBreweryDbContext>());
 
         return services;

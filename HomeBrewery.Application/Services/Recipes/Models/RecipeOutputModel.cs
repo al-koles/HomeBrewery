@@ -10,7 +10,7 @@ public class RecipeOutputModel : IMapWith<Recipe>
     {
         Users = new HashSet<int>();
     }
-    
+
     public string Name { get; set; } = null!;
     public string Description { get; set; } = null!;
     public string Text { get; set; } = null!;

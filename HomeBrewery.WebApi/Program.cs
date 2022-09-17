@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,7 +29,7 @@ builder.Services.AddApplication();
 builder.Services.AddPersistence(configuration);
 
 builder.Services.AddCors(opt =>
-    opt.AddDefaultPolicy(policy => 
+    opt.AddDefaultPolicy(policy =>
         policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin()));
 
 builder.Services.AddIdentity<HBUser, HBRole>(config =>
@@ -46,7 +47,7 @@ builder.Services.AddIdentity<HBUser, HBRole>(config =>
 
 builder.Services.AddControllers()
     .AddNewtonsoftJson(opt =>
-        opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+        opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
 
 builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
@@ -72,7 +73,7 @@ builder.Services.AddAuthentication(config =>
             ValidAudience = jwtBearerTokenSettings.Audience,
             ValidateLifetime = true,
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtBearerTokenSettings.SecretKey)),
-            ValidateIssuerSigningKey = true,
+            ValidateIssuerSigningKey = true
         };
     });
 builder.Services.AddAuthorization();

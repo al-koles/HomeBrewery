@@ -7,11 +7,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\HomeBrewery.Application\HomeBrewery.Application.csproj" />
+        <ProjectReference Include="..\HomeBrewery.Application\HomeBrewery.Application.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.9" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.9"/>
     </ItemGroup>
 
 </Project>

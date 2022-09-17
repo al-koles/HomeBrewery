@@ -9,7 +9,7 @@ public class UserPatchModel : IMapWith<HBUser>
     public int Id { get; set; }
     public string? Email { get; set; } = null!;
     public string? Password { get; set; } = null!;
-    
+
     public void Mapping(Profile profile)
     {
         profile.CreateMap<UserPatchModel, HBUser>()

@@ -23,21 +23,21 @@ public static class Seeder
                 Id = 2,
                 Name = Role.Admin.ToString(),
                 NormalizedName = Role.Admin.ToString().ToUpper()
-            },
+            }
         };
 
         builder.Entity<HBRole>().HasData(roles);
-        
-        var admin = new HBUser()
+
+        var admin = new HBUser
         {
             Id = 1,
             UserName = defaultAdminSettings.Email,
             Email = defaultAdminSettings.Email,
             NormalizedUserName = defaultAdminSettings.Email.ToUpper(),
             NormalizedEmail = defaultAdminSettings.Email.ToUpper(),
-            SecurityStamp = Guid.NewGuid().ToString(),
+            SecurityStamp = Guid.NewGuid().ToString()
         };
-        
+
         var passwordHasher = new PasswordHasher<HBUser>();
         admin.PasswordHash = passwordHasher.HashPassword(admin, defaultAdminSettings.Password);
 

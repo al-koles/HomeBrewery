@@ -11,13 +11,13 @@ namespace HomeBrewery.Application.Services.Users;
 
 public class UsersService : IUsersService
 {
-    private readonly IMapper _mapper;
     private readonly IHomeBreweryDbContext _dbContext;
+    private readonly IMapper _mapper;
     private readonly UserManager<HBUser> _userManager;
 
     public UsersService(
-        IMapper mapper, 
-        IHomeBreweryDbContext dbContext, 
+        IMapper mapper,
+        IHomeBreweryDbContext dbContext,
         UserManager<HBUser> userManager)
     {
         _mapper = mapper;
@@ -47,7 +47,7 @@ public class UsersService : IUsersService
     {
         var users = await _userManager.Users.ToListAsync();
         var userModels = _mapper.Map<List<UserOutputModel>>(users);
-        
+
         foreach (var user in users)
         {
             var roleNames = await _userManager.GetRolesAsync(user);
@@ -102,7 +102,7 @@ public class UsersService : IUsersService
 
         await _userManager.AddToRolesAsync(user, roles.Select(r => r.ToString()));
     }
-    
+
     public async Task RemoveFromRolesAsync(int userId, IEnumerable<Role> roles)
     {
         var user = await _dbContext.Users

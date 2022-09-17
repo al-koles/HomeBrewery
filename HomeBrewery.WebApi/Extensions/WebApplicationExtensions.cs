@@ -7,10 +7,10 @@ public static class WebApplicationExtensions
     public static void MigrateDbContextIfNecessary<TDbContext>(this WebApplication app) where TDbContext : DbContext
     {
         using var scope = app.Services.CreateScope();
-        
+
         var logger = scope.ServiceProvider.GetRequiredService<ILogger<TDbContext>>();
         var dbContext = scope.ServiceProvider.GetService<TDbContext>();
-        
+
         try
         {
             if (dbContext.Database.GetPendingMigrations().Any())

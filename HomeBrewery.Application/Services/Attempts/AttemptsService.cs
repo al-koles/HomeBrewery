@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HomeBrewery.Application.Services.Attempts;
 
-public partial class AttemptsService : IAttemptsService
+public class AttemptsService : IAttemptsService
 {
     private readonly IHomeBreweryDbContext _dbContext;
     private readonly IMapper _mapper;

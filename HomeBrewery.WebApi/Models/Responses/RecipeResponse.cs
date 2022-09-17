@@ -22,5 +22,4 @@ public class RecipeResponse : IMapWith<RecipeOutputModel>
     public decimal Price { get; set; }
 
     public ICollection<int> Users { get; set; }
-
 }

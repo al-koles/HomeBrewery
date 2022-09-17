@@ -7,10 +7,9 @@ namespace HomeBrewery.WebApi.Models.Requests;
 
 public class PatchUserRequest : IMapWith<UserPatchModel>
 {
-    [DataType(DataType.EmailAddress)]
-    public string? Email { get; set; }
-    [DataType(DataType.Password)]
-    public string? Password { get; set; }
+    [DataType(DataType.EmailAddress)] public string? Email { get; set; }
+
+    [DataType(DataType.Password)] public string? Password { get; set; }
 
     public void Mapping(Profile profile)
     {

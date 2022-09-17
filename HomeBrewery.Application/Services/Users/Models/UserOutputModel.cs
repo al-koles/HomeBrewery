@@ -10,7 +10,7 @@ public class UserOutputModel : IMapWith<HBUser>
     {
         Roles = new List<Role>();
     }
-    
+
     public int Id { get; set; }
     public string Email { get; set; } = null!;
     public List<Role> Roles { get; set; }

@@ -8,8 +8,8 @@ using Microsoft.Extensions.Options;
 
 namespace HomeBrewery.Persistence;
 
-public class HomeBreweryDbContext : IdentityDbContext<HBUser, HBRole, int, 
-    IdentityUserClaim<int>, HBUserRole, IdentityUserLogin<int>, IdentityRoleClaim<int>, 
+public class HomeBreweryDbContext : IdentityDbContext<HBUser, HBRole, int,
+    IdentityUserClaim<int>, HBUserRole, IdentityUserLogin<int>, IdentityRoleClaim<int>,
     IdentityUserToken<int>>, IHomeBreweryDbContext
 {
     private readonly DefaultAdminSettings _adminSettings;
@@ -36,7 +36,7 @@ public class HomeBreweryDbContext : IdentityDbContext<HBUser, HBRole, int,
             .HasMany(e => e.UserRoles)
             .WithOne()
             .HasForeignKey(e => e.UserId);
-        
+
         builder.Entity<HBRole>()
             .HasMany(e => e.UserRoles)
             .WithOne()

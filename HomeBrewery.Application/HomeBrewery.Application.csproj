@@ -7,13 +7,13 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\HomeBrewery.Domain\HomeBrewery.Domain.csproj" />
+        <ProjectReference Include="..\HomeBrewery.Domain\HomeBrewery.Domain.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
-      <PackageReference Include="IdentityServer4.AspNetIdentity" Version="4.1.2" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.9" />
+        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0"/>
+        <PackageReference Include="IdentityServer4.AspNetIdentity" Version="4.1.2"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.9"/>
     </ItemGroup>
 
 </Project>
