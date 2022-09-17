@@ -9,7 +9,6 @@ public class Attempt : Entity
     
     public HBUser User { get; set; } = null!;
     public Recipe Recipe { get; set; } = null!;
-    public DateTime StartDateTime { get; set; }
-
+    public DateTime StartTimestamp { get; set; }
     public ICollection<Sample> Samples { get; set; }
 }

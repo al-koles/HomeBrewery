@@ -197,7 +197,7 @@ namespace HomeBrewery.Persistence.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<int>(type: "int", nullable: false),
                     RecipeId = table.Column<int>(type: "int", nullable: false),
-                    StartDateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    StartTimestamp = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -222,12 +222,8 @@ namespace HomeBrewery.Persistence.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Extract = table.Column<double>(type: "float", nullable: true),
-                    Gravity = table.Column<double>(type: "float", nullable: true),
-                    Density = table.Column<double>(type: "float", nullable: true),
-                    Alcohol = table.Column<double>(type: "float", nullable: true),
-                    Sugar = table.Column<double>(type: "float", nullable: true),
-                    Temperature = table.Column<double>(type: "float", nullable: true),
+                    Type = table.Column<int>(type: "int", nullable: false),
+                    Timestamp = table.Column<DateTime>(type: "datetime2", nullable: false),
                     AttemptId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -244,17 +240,17 @@ namespace HomeBrewery.Persistence.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { 1, "316a029d-377f-4c78-b26e-2cc5a64fee33", "User", "USER" });
+                values: new object[] { 1, "e1a2efdd-ebdf-4a4b-b72b-dedad5cdc2d3", "User", "USER" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { 2, "2f339ab7-31f2-4f89-8536-80824474aec9", "Admin", "ADMIN" });
+                values: new object[] { 2, "9bd573dc-05c3-42c4-8018-a2196bc889d5", "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { 1, 0, "85d46da5-631c-435f-ae43-f6ffef85a14b", "oleksii.kolesnyk1@nure.ua", false, false, null, "OLEKSII.KOLESNYK1@NURE.UA", "OLEKSII.KOLESNYK1@NURE.UA", "AQAAAAEAACcQAAAAEK6hwbiTeG9gVp52AySRpk66NwQjBSOs/fo9QUGzgsnaoCy61RVgbtz+oVbLJ47rcA==", null, false, "29441930-a753-4794-aebf-91bce35eff58", false, "oleksii.kolesnyk1@nure.ua" });
+                values: new object[] { 1, 0, "b9c479b1-86ea-4efa-9590-1fc12978f45c", "oleksii.kolesnyk1@nure.ua", false, false, null, "OLEKSII.KOLESNYK1@NURE.UA", "OLEKSII.KOLESNYK1@NURE.UA", "AQAAAAEAACcQAAAAEFESK1fxI/dEkZ/cvoS81FC7p/+mABPTfQ8FSzXYSfaKOhY0FDIBHlSl3vnkm91/JA==", null, false, "2c4f2f02-f081-4d23-83c7-95462e871305", false, "oleksii.kolesnyk1@nure.ua" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",

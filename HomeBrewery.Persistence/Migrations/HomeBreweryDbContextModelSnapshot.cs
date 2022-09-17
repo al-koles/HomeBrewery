@@ -33,7 +33,7 @@ namespace HomeBrewery.Persistence.Migrations
                     b.Property<int>("RecipeId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("StartDateTime")
+                    b.Property<DateTime>("StartTimestamp")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("UserId")
@@ -81,14 +81,14 @@ namespace HomeBrewery.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "316a029d-377f-4c78-b26e-2cc5a64fee33",
+                            ConcurrencyStamp = "e1a2efdd-ebdf-4a4b-b72b-dedad5cdc2d3",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "2f339ab7-31f2-4f89-8536-80824474aec9",
+                            ConcurrencyStamp = "9bd573dc-05c3-42c4-8018-a2196bc889d5",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -166,15 +166,15 @@ namespace HomeBrewery.Persistence.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "85d46da5-631c-435f-ae43-f6ffef85a14b",
+                            ConcurrencyStamp = "b9c479b1-86ea-4efa-9590-1fc12978f45c",
                             Email = "oleksii.kolesnyk1@nure.ua",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "OLEKSII.KOLESNYK1@NURE.UA",
                             NormalizedUserName = "OLEKSII.KOLESNYK1@NURE.UA",
-                            PasswordHash = "AQAAAAEAACcQAAAAEK6hwbiTeG9gVp52AySRpk66NwQjBSOs/fo9QUGzgsnaoCy61RVgbtz+oVbLJ47rcA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFESK1fxI/dEkZ/cvoS81FC7p/+mABPTfQ8FSzXYSfaKOhY0FDIBHlSl3vnkm91/JA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "29441930-a753-4794-aebf-91bce35eff58",
+                            SecurityStamp = "2c4f2f02-f081-4d23-83c7-95462e871305",
                             TwoFactorEnabled = false,
                             UserName = "oleksii.kolesnyk1@nure.ua"
                         });
@@ -268,26 +268,14 @@ namespace HomeBrewery.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<double?>("Alcohol")
-                        .HasColumnType("float");
-
                     b.Property<int>("AttemptId")
                         .HasColumnType("int");
 
-                    b.Property<double?>("Density")
-                        .HasColumnType("float");
+                    b.Property<DateTime>("Timestamp")
+                        .HasColumnType("datetime2");
 
-                    b.Property<double?>("Extract")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("Gravity")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("Sugar")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("Temperature")
-                        .HasColumnType("float");
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

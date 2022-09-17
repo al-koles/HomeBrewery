@@ -1,13 +1,19 @@
 ﻿namespace HomeBrewery.Domain;
 
+public enum SampleType
+{
+    Extract,
+    Gravity,
+    Density,
+    Alcohol,
+    Sugar,
+    Temperature
+}
+
 public class Sample : Entity
 {
-    public double? Extract { get; set; }
-    public double? Gravity { get; set; }
-    public double? Density { get; set; }
-    public double? Alcohol { get; set; }
-    public double? Sugar { get; set; }
-    public double? Temperature { get; set; }
+    public SampleType Type { get; set; }
+    public DateTime Timestamp { get; set; }
 
     public Attempt Attempt { get; set; } = null!;
 }
