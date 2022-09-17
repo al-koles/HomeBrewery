@@ -1,6 +1,6 @@
 ﻿using HomeBrewery.Application.Common.Mappings;
-using HomeBrewery.Domain;
-using HomeBrewery.Domain.Data;
+using HomeBrewery.Domain.Constants;
+using HomeBrewery.Domain.Entities;
 
 namespace HomeBrewery.Application.Services.Users.Models;
 

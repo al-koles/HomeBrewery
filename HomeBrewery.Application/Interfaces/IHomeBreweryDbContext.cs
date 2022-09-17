@@ -1,4 +1,4 @@
-﻿using HomeBrewery.Domain;
+﻿using HomeBrewery.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace HomeBrewery.Application.Interfaces;

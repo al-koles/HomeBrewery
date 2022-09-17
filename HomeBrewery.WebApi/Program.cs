@@ -5,7 +5,7 @@ using HomeBrewery.Application;
 using HomeBrewery.Application.Common.Mappings;
 using HomeBrewery.Application.Common.Settings;
 using HomeBrewery.Application.Interfaces;
-using HomeBrewery.Domain;
+using HomeBrewery.Domain.Entities;
 using HomeBrewery.Persistence;
 using HomeBrewery.WebApi.Extensions;
 using MDAreas.WebApi.Middleware;

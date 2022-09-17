@@ -1,5 +1,5 @@
 ﻿using HomeBrewery.Application.Common.Mappings;
-using HomeBrewery.Domain;
+using HomeBrewery.Domain.Entities;
 
 namespace HomeBrewery.Application.Services.Samples.Models;
 

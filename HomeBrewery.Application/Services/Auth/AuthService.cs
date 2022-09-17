@@ -5,7 +5,7 @@ using AutoMapper;
 using HomeBrewery.Application.Common.Exceptions;
 using HomeBrewery.Application.Common.Settings;
 using HomeBrewery.Application.Services.Auth.Models;
-using HomeBrewery.Domain;
+using HomeBrewery.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;

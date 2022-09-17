@@ -3,7 +3,7 @@ using AutoMapper;
 using HomeBrewery.Application.Common.Exceptions;
 using HomeBrewery.Application.Interfaces;
 using HomeBrewery.Application.Services.Recipes.Models;
-using HomeBrewery.Domain;
+using HomeBrewery.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace HomeBrewery.Application.Services.Recipes;

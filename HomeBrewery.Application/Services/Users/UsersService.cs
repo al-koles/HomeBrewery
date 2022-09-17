@@ -2,8 +2,8 @@
 using HomeBrewery.Application.Common.Exceptions;
 using HomeBrewery.Application.Interfaces;
 using HomeBrewery.Application.Services.Users.Models;
-using HomeBrewery.Domain;
-using HomeBrewery.Domain.Data;
+using HomeBrewery.Domain.Constants;
+using HomeBrewery.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 

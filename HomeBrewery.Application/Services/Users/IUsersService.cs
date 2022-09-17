@@ -1,5 +1,5 @@
 ﻿using HomeBrewery.Application.Services.Users.Models;
-using HomeBrewery.Domain.Data;
+using HomeBrewery.Domain.Constants;
 
 namespace HomeBrewery.Application.Services.Users;
 

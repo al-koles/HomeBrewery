@@ -2,7 +2,7 @@
 using HomeBrewery.Application.Common.Exceptions;
 using HomeBrewery.Application.Interfaces;
 using HomeBrewery.Application.Services.Samples.Models;
-using HomeBrewery.Domain;
+using HomeBrewery.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace HomeBrewery.Application.Services.Samples;

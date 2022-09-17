@@ -1,5 +1,5 @@
 ﻿using HomeBrewery.Application.Interfaces;
-using HomeBrewery.Domain;
+using HomeBrewery.Domain.Entities;
 using HomeBrewery.Persistence.Settings;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;

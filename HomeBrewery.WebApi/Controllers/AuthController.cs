@@ -2,7 +2,7 @@ using AutoMapper;
 using HomeBrewery.Application.Services.Auth;
 using HomeBrewery.Application.Services.Auth.Models;
 using HomeBrewery.Application.Services.Users;
-using HomeBrewery.Domain.Data;
+using HomeBrewery.Domain.Constants;
 using HomeBrewery.WebApi.Models.Requests;
 using HomeBrewery.WebApi.Models.Responses;
 using Microsoft.AspNetCore.Mvc;
