@@ -11,6 +11,7 @@ public class RecipeOutputModel : IMapWith<Recipe>
         Users = new HashSet<int>();
     }
 
+    public int Id { get; set; }
     public string Name { get; set; } = null!;
     public string Description { get; set; } = null!;
     public string Text { get; set; } = null!;

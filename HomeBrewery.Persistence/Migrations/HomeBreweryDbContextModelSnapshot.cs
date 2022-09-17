@@ -22,7 +22,7 @@ namespace HomeBrewery.Persistence.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("HomeBrewery.Domain.Attempt", b =>
+            modelBuilder.Entity("HomeBrewery.Domain.Entities.Attempt", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -48,7 +48,7 @@ namespace HomeBrewery.Persistence.Migrations
                     b.ToTable("Attempts");
                 });
 
-            modelBuilder.Entity("HomeBrewery.Domain.HBRole", b =>
+            modelBuilder.Entity("HomeBrewery.Domain.Entities.HBRole", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -81,20 +81,20 @@ namespace HomeBrewery.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "e1a2efdd-ebdf-4a4b-b72b-dedad5cdc2d3",
+                            ConcurrencyStamp = "a40355ca-adcb-4755-9cb7-591b15f8e63c",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "9bd573dc-05c3-42c4-8018-a2196bc889d5",
+                            ConcurrencyStamp = "258d1074-fa07-49e5-9e42-4f5c3fae4656",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
                 });
 
-            modelBuilder.Entity("HomeBrewery.Domain.HBUser", b =>
+            modelBuilder.Entity("HomeBrewery.Domain.Entities.HBUser", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -166,21 +166,21 @@ namespace HomeBrewery.Persistence.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b9c479b1-86ea-4efa-9590-1fc12978f45c",
+                            ConcurrencyStamp = "2b8ec6b6-ddc6-41c0-8ff8-8a34d173213e",
                             Email = "oleksii.kolesnyk1@nure.ua",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "OLEKSII.KOLESNYK1@NURE.UA",
                             NormalizedUserName = "OLEKSII.KOLESNYK1@NURE.UA",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFESK1fxI/dEkZ/cvoS81FC7p/+mABPTfQ8FSzXYSfaKOhY0FDIBHlSl3vnkm91/JA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOq+DJg2FYuCJ4okQ1FJzXo/FkBCn8fEQeKdjpARzAnXi2XpwxCioVTkyLgp5mucJw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "2c4f2f02-f081-4d23-83c7-95462e871305",
+                            SecurityStamp = "135cadc2-b39a-4fc8-a5cb-78bf1ac29478",
                             TwoFactorEnabled = false,
                             UserName = "oleksii.kolesnyk1@nure.ua"
                         });
                 });
 
-            modelBuilder.Entity("HomeBrewery.Domain.HBUserRole", b =>
+            modelBuilder.Entity("HomeBrewery.Domain.Entities.HBUserRole", b =>
                 {
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -217,7 +217,7 @@ namespace HomeBrewery.Persistence.Migrations
                         });
                 });
 
-            modelBuilder.Entity("HomeBrewery.Domain.Recipe", b =>
+            modelBuilder.Entity("HomeBrewery.Domain.Entities.Recipe", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -260,7 +260,7 @@ namespace HomeBrewery.Persistence.Migrations
                     b.ToTable("Recipes");
                 });
 
-            modelBuilder.Entity("HomeBrewery.Domain.Sample", b =>
+            modelBuilder.Entity("HomeBrewery.Domain.Entities.Sample", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -276,6 +276,10 @@ namespace HomeBrewery.Persistence.Migrations
 
                     b.Property<int>("Type")
                         .HasColumnType("int");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -372,15 +376,15 @@ namespace HomeBrewery.Persistence.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("HomeBrewery.Domain.Attempt", b =>
+            modelBuilder.Entity("HomeBrewery.Domain.Entities.Attempt", b =>
                 {
-                    b.HasOne("HomeBrewery.Domain.Recipe", "Recipe")
+                    b.HasOne("HomeBrewery.Domain.Entities.Recipe", "Recipe")
                         .WithMany("UserRecipes")
                         .HasForeignKey("RecipeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("HomeBrewery.Domain.HBUser", "User")
+                    b.HasOne("HomeBrewery.Domain.Entities.HBUser", "User")
                         .WithMany("UserRecipes")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -391,32 +395,32 @@ namespace HomeBrewery.Persistence.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("HomeBrewery.Domain.HBUserRole", b =>
+            modelBuilder.Entity("HomeBrewery.Domain.Entities.HBUserRole", b =>
                 {
-                    b.HasOne("HomeBrewery.Domain.HBRole", null)
+                    b.HasOne("HomeBrewery.Domain.Entities.HBRole", null)
                         .WithMany("UserRoles")
                         .HasForeignKey("HBRoleId");
 
-                    b.HasOne("HomeBrewery.Domain.HBUser", null)
+                    b.HasOne("HomeBrewery.Domain.Entities.HBUser", null)
                         .WithMany("UserRoles")
                         .HasForeignKey("HBUserId");
 
-                    b.HasOne("HomeBrewery.Domain.HBRole", null)
+                    b.HasOne("HomeBrewery.Domain.Entities.HBRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("HomeBrewery.Domain.HBUser", null)
+                    b.HasOne("HomeBrewery.Domain.Entities.HBUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("HomeBrewery.Domain.Sample", b =>
+            modelBuilder.Entity("HomeBrewery.Domain.Entities.Sample", b =>
                 {
-                    b.HasOne("HomeBrewery.Domain.Attempt", "Attempt")
+                    b.HasOne("HomeBrewery.Domain.Entities.Attempt", "Attempt")
                         .WithMany("Samples")
                         .HasForeignKey("AttemptId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -427,7 +431,7 @@ namespace HomeBrewery.Persistence.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
-                    b.HasOne("HomeBrewery.Domain.HBRole", null)
+                    b.HasOne("HomeBrewery.Domain.Entities.HBRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -436,7 +440,7 @@ namespace HomeBrewery.Persistence.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
                 {
-                    b.HasOne("HomeBrewery.Domain.HBUser", null)
+                    b.HasOne("HomeBrewery.Domain.Entities.HBUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -445,7 +449,7 @@ namespace HomeBrewery.Persistence.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
                 {
-                    b.HasOne("HomeBrewery.Domain.HBUser", null)
+                    b.HasOne("HomeBrewery.Domain.Entities.HBUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -454,31 +458,31 @@ namespace HomeBrewery.Persistence.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
                 {
-                    b.HasOne("HomeBrewery.Domain.HBUser", null)
+                    b.HasOne("HomeBrewery.Domain.Entities.HBUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("HomeBrewery.Domain.Attempt", b =>
+            modelBuilder.Entity("HomeBrewery.Domain.Entities.Attempt", b =>
                 {
                     b.Navigation("Samples");
                 });
 
-            modelBuilder.Entity("HomeBrewery.Domain.HBRole", b =>
+            modelBuilder.Entity("HomeBrewery.Domain.Entities.HBRole", b =>
                 {
                     b.Navigation("UserRoles");
                 });
 
-            modelBuilder.Entity("HomeBrewery.Domain.HBUser", b =>
+            modelBuilder.Entity("HomeBrewery.Domain.Entities.HBUser", b =>
                 {
                     b.Navigation("UserRecipes");
 
                     b.Navigation("UserRoles");
                 });
 
-            modelBuilder.Entity("HomeBrewery.Domain.Recipe", b =>
+            modelBuilder.Entity("HomeBrewery.Domain.Entities.Recipe", b =>
                 {
                     b.Navigation("UserRecipes");
                 });

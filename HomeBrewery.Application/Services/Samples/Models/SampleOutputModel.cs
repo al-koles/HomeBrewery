@@ -9,6 +9,7 @@ public class SampleOutputModel : IMapWith<Sample>
     public int Id { get; set; }
     public int AttemptId { get; set; }
     public SampleType Type { get; set; }
+    public string Value { get; set; } = null!;
     public DateTime Timestamp { get; set; }
 
     public void Mapping(Profile profile)

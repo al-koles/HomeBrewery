@@ -223,6 +223,7 @@ namespace HomeBrewery.Persistence.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Type = table.Column<int>(type: "int", nullable: false),
+                    Value = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Timestamp = table.Column<DateTime>(type: "datetime2", nullable: false),
                     AttemptId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -240,17 +241,17 @@ namespace HomeBrewery.Persistence.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { 1, "e1a2efdd-ebdf-4a4b-b72b-dedad5cdc2d3", "User", "USER" });
+                values: new object[] { 1, "a40355ca-adcb-4755-9cb7-591b15f8e63c", "User", "USER" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { 2, "9bd573dc-05c3-42c4-8018-a2196bc889d5", "Admin", "ADMIN" });
+                values: new object[] { 2, "258d1074-fa07-49e5-9e42-4f5c3fae4656", "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { 1, 0, "b9c479b1-86ea-4efa-9590-1fc12978f45c", "oleksii.kolesnyk1@nure.ua", false, false, null, "OLEKSII.KOLESNYK1@NURE.UA", "OLEKSII.KOLESNYK1@NURE.UA", "AQAAAAEAACcQAAAAEFESK1fxI/dEkZ/cvoS81FC7p/+mABPTfQ8FSzXYSfaKOhY0FDIBHlSl3vnkm91/JA==", null, false, "2c4f2f02-f081-4d23-83c7-95462e871305", false, "oleksii.kolesnyk1@nure.ua" });
+                values: new object[] { 1, 0, "2b8ec6b6-ddc6-41c0-8ff8-8a34d173213e", "oleksii.kolesnyk1@nure.ua", false, false, null, "OLEKSII.KOLESNYK1@NURE.UA", "OLEKSII.KOLESNYK1@NURE.UA", "AQAAAAEAACcQAAAAEOq+DJg2FYuCJ4okQ1FJzXo/FkBCn8fEQeKdjpARzAnXi2XpwxCioVTkyLgp5mucJw==", null, false, "135cadc2-b39a-4fc8-a5cb-78bf1ac29478", false, "oleksii.kolesnyk1@nure.ua" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
